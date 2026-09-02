@@ -1,0 +1,689 @@
+/* ============================================================
+   NOAM DOUMENC — FEUILLE DE STYLE
+   Sommaire :
+   1. Variables (couleurs, polices)   -> change les couleurs ICI
+   2. Reset & base
+   3. Composants reutilisables (boutons, etiquettes, puces)
+   4. Barre de navigation
+   5. Hero
+   6. Grille des sections
+   7. Parcours (experiences & projets)
+   8. Competences
+   9. Contact & formulaire
+   10. Pied de page
+   11. Responsive (mobile)
+   ============================================================ */
+
+
+/* ============================================================
+   1. VARIABLES — thème CLAIR par défaut
+   Palette : gris chauds + un seul accent "brique toulousaine".
+   Pour changer l'identité du site, il suffit de modifier --accent.
+   ============================================================ */
+:root {
+  /* Couleurs */
+  --paper:      #F6F4F2;  /* fond de page */
+  --surface:    #FFFFFF;  /* fond des cartes */
+  --surface-alt:#FBFAF9;  /* fond des cartes secondaires */
+  --ink:        #1A1618;  /* texte principal */
+  --ink-2:      #5A5254;  /* texte secondaire */
+  --ink-3:      #8D8386;  /* etiquettes, mentions */
+  --line:       #E3DCDA;  /* filets et bordures */
+  --line-strong:#CFC5C2;
+  --accent:     #A9412F;  /* accent principal (brique) */
+  --accent-ink: #8E3524;  /* accent au survol */
+  --accent-wash:#F2E4E0;  /* fond teinte tres leger */
+  --on-accent:  #FFF8F6;  /* texte pose sur l'accent */
+  --signal:     #2F6B62;  /* vert sourd : pastille "disponible" */
+
+  /* Polices */
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body:    "Newsreader", Georgia, "Times New Roman", serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  /* Mise en page */
+  --wrap: 1080px;          /* largeur max du contenu */
+  --gutter: clamp(1.25rem, 5vw, 3.5rem);
+  --radius: 4px;
+
+  color-scheme: light dark;
+}
+
+/* Thème SOMBRE automatique (reglage systeme du visiteur).
+   :not([data-theme="light"]) = si le visiteur force le clair, on n'applique pas. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:      #141112;
+    --surface:    #1C1819;
+    --surface-alt:#211C1E;
+    --ink:        #F2ECEA;
+    --ink-2:      #B5AAAB;
+    --ink-3:      #877D7F;
+    --line:       #2E2829;
+    --line-strong:#413939;
+    --accent:     #E07A62;
+    --accent-ink: #F09B85;
+    --accent-wash:#2A1D1A;
+    --on-accent:  #1A0F0C;
+    --signal:     #6FB3A4;
+  }
+}
+
+/* Thème SOMBRE force (si un jour tu ajoutes un bouton jour/nuit :
+   il suffira d'ecrire data-theme="dark" sur la balise <html>). */
+:root[data-theme="dark"] {
+  --paper:      #141112;
+  --surface:    #1C1819;
+  --surface-alt:#211C1E;
+  --ink:        #F2ECEA;
+  --ink-2:      #B5AAAB;
+  --ink-3:      #877D7F;
+  --line:       #2E2829;
+  --line-strong:#413939;
+  --accent:     #E07A62;
+  --accent-ink: #F09B85;
+  --accent-wash:#2A1D1A;
+  --on-accent:  #1A0F0C;
+  --signal:     #6FB3A4;
+}
+
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Si le visiteur a demande "moins d'animations" dans son systeme, on obeit. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p { margin: 0; }
+ul, ol, dl, dd { margin: 0; padding: 0; }
+li { list-style: none; }
+
+a { color: inherit; }
+
+strong { font-weight: 600; }
+
+/* Focus clavier visible partout (accessibilite) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Lien "Aller au contenu" : cache tant qu'on ne tabule pas */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 0.6rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus { left: 0; }
+
+/* Petite etiquette en majuscules (reutilisee partout) */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+
+/* ============================================================
+   3. COMPOSANTS RÉUTILISABLES
+   ============================================================ */
+
+/* --- Boutons --- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  padding: 0.7rem 1.4rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.btn--solid {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.btn--solid:hover { background: var(--accent-ink); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+.btn--ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* --- Étiquettes de type (Alternance / Entreprise / Communauté) --- */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+/* L'entreprise (Oracle) est la seule etiquette coloree : c'est le projet a mettre en avant. */
+.tag--venture {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+
+/* --- Petites puces de mots-clés --- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.chips li {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  padding: 0.25rem 0.6rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-2);
+}
+.chips--mono li { font-family: var(--font-mono); font-size: 0.75rem; }
+
+
+/* ============================================================
+   4. BARRE DE NAVIGATION (collante en haut)
+   ============================================================ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar__inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0.85rem var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.topbar__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.topbar__nav {
+  display: flex;
+  gap: 1.4rem;
+}
+.topbar__nav a {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-decoration: none;
+  color: var(--ink-2);
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.topbar__nav a:hover,
+.topbar__nav a.is-active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+
+/* ============================================================
+   5. HERO
+   ============================================================ */
+.hero {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: clamp(3.5rem, 10vw, 7rem) var(--gutter) clamp(2.5rem, 6vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.hero__title {
+  font-size: clamp(2.75rem, 8vw, 5.25rem);
+  max-width: 14ch;
+}
+/* Le mot en italique dans le titre est en serif : c'est le petit contraste
+   typographique du site. Change le mot dans index.html, pas ici. */
+.hero__title em {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.hero__lede {
+  max-width: 60ch;
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.3rem);
+  color: var(--ink-2);
+}
+.hero__lede strong { color: var(--ink); }
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* Bandeau d'infos pratiques sous les boutons */
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2.5rem;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.fact dt {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.2rem;
+}
+.fact dd {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 20%, transparent);
+}
+
+
+/* ============================================================
+   6. GRILLE DES SECTIONS
+   Chaque section = un titre a gauche + le contenu a droite.
+   ============================================================ */
+.section {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--gutter);
+  border-top: 1px solid var(--line);
+}
+.grid {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 2rem 3rem;
+  align-items: start;
+}
+.grid__label {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  position: sticky;
+  top: 5rem;             /* reste visible pendant le defilement */
+}
+.grid__body { min-width: 0; }
+
+/* --- Texte courant (section "À propos") --- */
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 62ch;
+  color: var(--ink-2);
+}
+.prose__lead {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.65rem);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.prose strong { color: var(--ink); }
+
+
+/* ============================================================
+   7. PARCOURS (expériences & projets)
+   ============================================================ */
+.entries {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.entry {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.4rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+/* Le projet Oracle est la carte mise en avant : filet accent a gauche. */
+.entry--feature {
+  border-left: 3px solid var(--accent);
+  background: var(--surface-alt);
+}
+.entry__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+.entry__date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.entry__title {
+  font-size: clamp(1.35rem, 1.2rem + 0.8vw, 1.85rem);
+}
+.entry__org {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+.entry__text {
+  color: var(--ink-2);
+  max-width: 68ch;
+}
+
+/* Lien "Suivre Oracle sur LinkedIn" sous la carte projet */
+.entry__link a {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.18s ease;
+}
+.entry__link a:hover { border-bottom-color: var(--accent); }
+
+/* Bloc Problème / Solution / Cible du projet Oracle */
+.pitch {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin: 0.4rem 0;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.pitch__row {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 1rem;
+}
+.pitch dt {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-top: 0.28rem;
+}
+.pitch dd {
+  color: var(--ink-2);
+  max-width: 62ch;
+}
+
+
+/* ============================================================
+   8. COMPÉTENCES
+   ============================================================ */
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1px;                      /* l'astuce : le fond fait les filets */
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.skill {
+  background: var(--surface);
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.skill h3 {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+.skill p {
+  font-size: 0.95rem;
+  color: var(--ink-2);
+}
+.skill--wide {
+  grid-column: 1 / -1;          /* la derniere carte prend toute la largeur */
+  background: var(--surface-alt);
+}
+
+
+/* ============================================================
+   9. CONTACT & FORMULAIRE
+   ============================================================ */
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 2rem 3rem;
+  align-items: start;
+}
+.contact__intro {
+  grid-column: 1 / -1;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.15rem, 1.05rem + 0.6vw, 1.5rem);
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  max-width: 40ch;
+  text-wrap: balance;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+}
+.field label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.field input,
+.field textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.8rem;
+  width: 100%;
+  resize: vertical;
+  transition: border-color 0.18s ease;
+}
+.field input::placeholder,
+.field textarea::placeholder { color: var(--ink-3); }
+.field input:focus,
+.field textarea:focus { border-color: var(--accent); }
+
+/* Champ en erreur (classe ajoutee par script.js) */
+.field.is-invalid input,
+.field.is-invalid textarea { border-color: var(--accent); }
+
+.form__note {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+  max-width: 42ch;
+}
+.form__note.is-error { color: var(--accent); }
+
+/* Liste des liens (email, LinkedIn, TikTok, Discord) */
+.links {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+.links li { border-bottom: 1px solid var(--line); }
+.links a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  text-decoration: none;
+  transition: color 0.18s ease, padding-left 0.18s ease;
+}
+.links a:hover {
+  color: var(--accent);
+  padding-left: 0.4rem;
+}
+.links__label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.links a:hover .links__label { color: var(--accent); }
+.links__value {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  text-align: right;
+}
+
+
+/* ============================================================
+   10. PIED DE PAGE
+   ============================================================ */
+.footer {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 2rem var(--gutter) 3rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-3);
+}
+
+
+/* ============================================================
+   11. RESPONSIVE
+   ============================================================ */
+
+/* Tablette : la grille "titre a gauche / contenu a droite" passe sur une colonne */
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .grid__label {
+    position: static;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .contact { grid-template-columns: 1fr; }
+  .pitch__row { grid-template-columns: 1fr; gap: 0.25rem; }
+}
+
+/* Mobile */
+@media (max-width: 620px) {
+  .topbar__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .topbar__nav {
+    gap: 1rem;
+    overflow-x: auto;          /* la nav defile plutot que de casser la page */
+    width: 100%;
+    padding-bottom: 2px;
+  }
+  .topbar__nav a { white-space: nowrap; }
+
+  .facts { gap: 1.1rem 2rem; }
+  .hero__actions .btn { flex: 1 1 auto; text-align: center; }
+}
+
+/* Impression : version CV papier propre */
+@media print {
+  .topbar, .hero__actions, .form, .skip-link { display: none; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .section { break-inside: avoid; }
+}

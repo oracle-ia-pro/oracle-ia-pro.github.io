@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ===== SEO : modifie ces 3 lignes avec ton nom / ta description ===== -->
+<title>Noam Doumenc — Portfolio</title>
+<meta name="description" content="Noam Doumenc, etudiant en BTS NDRC a Toulouse, recherche une alternance en negociation et business development. Fondateur d'Oracle, une IA anti-gaspillage pour les boulangeries, et gerant du serveur GTA RP Tempeste.">
+<meta name="author" content="Noam Doumenc">
+
+<!-- Aperçu quand tu partages le lien sur LinkedIn (Open Graph).
+     Remplace l'URL par celle de ton site une fois publié. -->
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Noam Doumenc — Futur commercial, déjà founder">
+<meta property="og:description" content="BTS NDRC à Toulouse, en recherche d'alternance. Fondateur d'Oracle, une IA anti-gaspillage pour les boulangeries.">
+<meta property="og:url" content="https://ton-pseudo.github.io/portfolio/">
+
+<!-- Polices Google : Bricolage Grotesque (titres), Newsreader (texte), IBM Plex Mono (etiquettes) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Lien d'accessibilite : invisible, apparait au clavier (touche Tab) -->
+<a class="skip-link" href="#apropos">Aller au contenu</a>
+
+<!-- ============================================================
+     BARRE DE NAVIGATION
+     ============================================================ -->
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="topbar__name" href="#top">Noam&nbsp;Doumenc</a>
+    <nav class="topbar__nav" aria-label="Navigation principale">
+      <a href="#apropos">À propos</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#competences">Compétences</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============================================================
+       1. HERO — l'accroche. C'est la premiere chose que lit un recruteur.
+       ============================================================ -->
+  <section class="hero">
+    <p class="eyebrow">Toulouse · BTS NDRC option NTC</p>
+
+    <!-- Titre accrocheur : garde-le court, 3 a 5 mots -->
+    <h1 class="hero__title">Futur commercial,<br><em>déjà</em> founder.</h1>
+
+    <!-- Sous-titre = ton positionnement en une phrase -->
+    <p class="hero__lede">
+      Je cherche une <strong>alternance en négociation, relation client ou business
+      development</strong>. En parallèle, je développe <strong>Oracle</strong>, une IA qui
+      aide les boulangeries à réduire leurs invendus, et je dirige <strong>Tempeste RP</strong>,
+      un serveur GTA RP et sa communauté.
+    </p>
+
+    <!-- Boutons d'action : remplace l'email et l'URL LinkedIn par les tiens -->
+    <div class="hero__actions">
+      <a class="btn btn--solid" href="mailto:noam.doumenc@gmail.com?subject=Proposition%20d%27alternance%20-%20BTS%20NDRC">Me contacter</a>
+      <a class="btn btn--ghost" href="https://www.linkedin.com/in/no%C3%A2m-doumenc-076281380/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+
+    <!-- Infos pratiques : les 3 questions que se pose tout recruteur -->
+    <dl class="facts">
+      <div class="fact">
+        <dt>Statut</dt>
+        <dd><span class="dot" aria-hidden="true"></span>Disponible</dd>
+      </div>
+      <div class="fact">
+        <dt>Recherche</dt>
+        <dd>Alternance · négociation &amp; business dev</dd>
+      </div>
+      <div class="fact">
+        <dt>Zone</dt>
+        <dd>Toulouse &amp; alentours</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- ============================================================
+       2. À PROPOS
+       ============================================================ -->
+  <section id="apropos" class="section">
+    <div class="grid">
+      <h2 class="grid__label">À propos</h2>
+      <div class="grid__body prose">
+        <p class="prose__lead">
+          J'ai 21 ans et je fais du commerce autrement : je vends, mais je construis aussi
+          les outils que je vends.
+        </p>
+        <p>
+          Pendant une année d'alternance chez <strong>Aftral</strong>, de septembre 2025 à
+          juin 2026, sur le recrutement et la communication, j'ai compris ce qui se joue
+          vraiment dans un échange commercial : cerner un besoin avant de proposer, écrire un
+          message qu'on a envie de lire, et relancer sans jamais être lourd. Je cherche
+          aujourd'hui l'entreprise avec qui poursuivre mon BTS NDRC.
+        </p>
+        <p>
+          Ce qui me différencie d'un profil NDRC classique : je passe mes soirées à construire.
+          <strong>Oracle</strong>, mon projet d'entreprise, m'oblige à faire de la vraie
+          découverte client auprès de boulangers. <strong>Tempeste RP</strong>, le serveur GTA
+          RP que je dirige, m'a appris à animer, encadrer et fédérer des centaines de personnes
+          sans aucune autorité hiérarchique. Et les outils d'IA font partie de ma méthode de travail quotidienne,
+          pas seulement de ma culture générale.
+        </p>
+        <p>
+          Ce que je cherche : une équipe qui me confie un vrai portefeuille, des objectifs
+          clairs, et quelqu'un pour me reprendre quand je me trompe.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. EXPÉRIENCES & PROJETS
+       Chaque bloc = un <article class="entry">. Duplique-en un pour ajouter une ligne.
+       ============================================================ -->
+  <section id="parcours" class="section">
+    <div class="grid">
+      <h2 class="grid__label">Parcours</h2>
+
+      <div class="grid__body entries">
+
+        <!-- ---------- Entrée 1 : Aftral ---------- -->
+        <article class="entry">
+          <header class="entry__head">
+            <span class="tag tag--role">Alternance</span>
+            <span class="entry__date">Septembre 2025 — Juin 2026</span>
+          </header>
+          <h3 class="entry__title">Recrutement &amp; communication</h3>
+          <p class="entry__org">Aftral — Toulouse</p>
+          <p class="entry__text">
+            Sourcing et qualification de candidats, rédaction et diffusion d'annonces,
+            entretiens de pré-sélection, production de contenus pour les réseaux du centre.
+            J'y ai appris à cadrer un besoin avec un opérationnel, à écrire des messages
+            d'approche qui obtiennent une réponse, et à tenir un suivi propre quand plusieurs
+            dossiers avancent en même temps.
+          </p>
+          <ul class="chips">
+            <li>Sourcing</li>
+            <li>Entretiens</li>
+            <li>Rédaction d'annonces</li>
+            <li>Suivi de dossiers</li>
+          </ul>
+        </article>
+
+        <!-- ---------- Entrée 2 : Oracle (bloc mis en avant) ---------- -->
+        <article class="entry entry--feature">
+          <header class="entry__head">
+            <span class="tag tag--venture">Entreprise en création</span>
+            <span class="entry__date">En cours</span>
+          </header>
+          <h3 class="entry__title">Oracle</h3>
+          <p class="entry__org">Solution IA anti-gaspillage · fondateur</p>
+
+          <!-- Problème / Solution / Cible : le format qu'un recruteur comprend en 10 secondes -->
+          <dl class="pitch">
+            <div class="pitch__row">
+              <dt>Le problème</dt>
+              <dd>
+                Une boulangerie produit à l'instinct. Météo, vacances scolaires, match au
+                stade, marché du dimanche : chaque événement fait bouger la demande, et tout
+                ce qui n'est pas vendu part à la poubelle. C'est de la marge perdue tous les
+                jours.
+              </dd>
+            </div>
+            <div class="pitch__row">
+              <dt>La solution</dt>
+              <dd>
+                Oracle croise l'historique des ventes avec les événements du quotidien pour
+                recommander les quantités à produire, produit par produit. Interface simple,
+                en français, lisible par un gérant qui n'est pas technique.
+              </dd>
+            </div>
+            <div class="pitch__row">
+              <dt>La cible</dt>
+              <dd>
+                Boulangeries et pâtisseries indépendantes, de 1 à 5 points de vente.
+              </dd>
+            </div>
+          </dl>
+
+          <p class="entry__text">
+            Je porte le projet de bout en bout : entretiens avec des gérants pour valider le
+            besoin, conception du produit, développement du MVP et construction du discours
+            commercial.
+          </p>
+          <p class="entry__link">
+            <a href="https://www.linkedin.com/company/oracle-ia-fr" target="_blank" rel="noopener">Suivre Oracle sur LinkedIn →</a>
+          </p>
+          <ul class="chips">
+            <li>Découverte client</li>
+            <li>Product design</li>
+            <li>IA appliquée</li>
+            <li>SQL · JavaScript</li>
+          </ul>
+        </article>
+
+        <!-- ---------- Entrée 3 : Communauté Discord ---------- -->
+        <article class="entry">
+          <header class="entry__head">
+            <span class="tag tag--community">Communauté</span>
+            <span class="entry__date">En cours</span>
+          </header>
+          <!-- Ajoute ici le nombre exact de membres et de joueurs connectés : un chiffre
+               précis a beaucoup plus d'impact que "plusieurs centaines". -->
+          <h3 class="entry__title">Tempeste RP</h3>
+          <p class="entry__org">Serveur GTA RP &amp; Discord — fondateur et gérant</p>
+          <p class="entry__text">
+            Je dirige Tempeste RP, un serveur GTA RP et la communauté Discord qui l'entoure.
+            Concrètement : encadrement d'une équipe de staff bénévole, rédaction et
+            application du règlement, gestion de la whitelist et des candidatures,
+            organisation d'événements en jeu, automatisation de l'accueil et de la modération
+            via des bots. C'est là que j'ai appris à faire adhérer des centaines de personnes
+            à un cadre sans jamais pouvoir le leur imposer — et à gérer les conflits avant
+            qu'ils ne dégénèrent.
+          </p>
+          <ul class="chips">
+            <li>Management d'équipe</li>
+            <li>Animation de communauté</li>
+            <li>Événementiel</li>
+            <li>Gestion de conflits</li>
+            <li>Automatisation (bots)</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. COMPÉTENCES
+       ============================================================ -->
+  <section id="competences" class="section">
+    <div class="grid">
+      <h2 class="grid__label">Compétences</h2>
+
+      <div class="grid__body skills">
+
+        <article class="skill">
+          <h3>Commercial &amp; relation client</h3>
+          <p>Découverte du besoin, argumentation, traitement des objections, relance et suivi
+          de portefeuille. Formation BTS NDRC option NTC.</p>
+        </article>
+
+        <article class="skill">
+          <h3>Communication &amp; rédaction</h3>
+          <p>Messages d'approche, annonces, posts LinkedIn et TikTok, contenus de marque.
+          Écrire court, clair, et pour la bonne personne.</p>
+        </article>
+
+        <article class="skill">
+          <h3>Prospection</h3>
+          <p>Constitution de fichiers, ciblage, séquences multicanal (mail, LinkedIn,
+          téléphone) et qualification des leads.</p>
+        </article>
+
+        <article class="skill">
+          <h3>Animation de communauté</h3>
+          <p>Structuration de serveurs Discord, modération, encadrement d'une équipe bénévole,
+          organisation d'événements gaming.</p>
+        </article>
+
+        <article class="skill">
+          <h3>IA &amp; automatisation</h3>
+          <p>Usage avancé des assistants IA pour la prospection, la rédaction et l'analyse.
+          Bots Discord, scripts et petits outils internes.</p>
+        </article>
+
+        <article class="skill">
+          <h3>Marketing digital &amp; SEO</h3>
+          <p>Bases du référencement naturel, structure de contenu, acquisition organique sur
+          les réseaux sociaux.</p>
+        </article>
+
+        <!-- Outils & langages : liste rapide, facile à compléter -->
+        <article class="skill skill--wide">
+          <h3>Outils &amp; langages</h3>
+          <ul class="chips chips--mono">
+            <li>Discord</li>
+            <li>LinkedIn</li>
+            <li>TikTok</li>
+            <li>Google Drive</li>
+            <li>Assistants IA</li>
+            <li>FiveM</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>SQL</li>
+            <li>Lua</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. CONTACT
+       Le formulaire n'envoie rien tout seul : il ouvre la messagerie
+       du visiteur avec un mail deja pre-rempli (voir script.js).
+       ============================================================ -->
+  <section id="contact" class="section section--contact">
+    <div class="grid">
+      <h2 class="grid__label">Contact</h2>
+
+      <div class="grid__body contact">
+        <p class="contact__intro">
+          Une alternance à pourvoir, une question sur Oracle, ou simplement l'envie
+          d'échanger ? Écrivez-moi — je réponds sous 24&nbsp;heures.
+        </p>
+
+        <!-- data-email : l'adresse qui recevra le message. Change-la ici. -->
+        <form class="form" id="contact-form" data-email="noam.doumenc@gmail.com" novalidate>
+          <div class="field">
+            <label for="nom">Votre nom</label>
+            <input type="text" id="nom" name="nom" autocomplete="name" required placeholder="Camille Dupont">
+          </div>
+
+          <div class="field">
+            <label for="email">Votre email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required placeholder="camille@entreprise.fr">
+          </div>
+
+          <div class="field">
+            <label for="message">Votre message</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Bonjour Noam, nous recherchons un alternant commercial pour la rentrée..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--solid">Ouvrir le mail pré-rempli</button>
+          <p class="form__note" id="form-status" role="status">
+            Ce bouton ouvre votre logiciel de messagerie avec le message déjà écrit.
+          </p>
+        </form>
+
+        <!-- Liens directs.
+             Si tu veux ajouter ton téléphone un jour, duplique un <li> :
+             <li><a href="tel:+33600000000">
+                   <span class="links__label">Téléphone</span>
+                   <span class="links__value">06 00 00 00 00</span>
+                 </a></li>
+             (le href reste au format international, seul le texte affiché est en 06) -->
+        <ul class="links">
+          <li>
+            <a href="mailto:noam.doumenc@gmail.com">
+              <span class="links__label">Email</span>
+              <span class="links__value">noam.doumenc@gmail.com</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/no%C3%A2m-doumenc-076281380/" target="_blank" rel="noopener">
+              <span class="links__label">LinkedIn</span>
+              <span class="links__value">Noâm Doumenc</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/company/oracle-ia-fr" target="_blank" rel="noopener">
+              <span class="links__label">Oracle</span>
+              <span class="links__value">Suivre le projet sur LinkedIn</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>Noam Doumenc — Toulouse · <span id="year">2026</span></p>
+  <p>Site codé à la main en HTML, CSS et JavaScript.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
